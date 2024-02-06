@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Item List </title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/lumen/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Item List</h1>
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+            <a href="{% url 'add_item' %}" class="btn btn-primary">Add Item</a>
+            <a href="{% url 'add_category' %}" class="btn btn-success">Add Category</a>
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.category.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.unit }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>
+                                <a href="{% url 'edit_item' item.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_item' item.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
